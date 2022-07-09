@@ -15,8 +15,11 @@ import java.util.List;
 @Entity
 public class Post {
     @Id
+    @Version private Long version;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
+    @Size(min = 4, max = 8)
     private String title;
     @Column(length=1000000)
     @Lob
@@ -24,9 +27,9 @@ public class Post {
     @Temporal(TemporalType.DATE)
     @CreationTimestamp
     private Date date;
-
     @ManyToOne(fetch = FetchType.EAGER)
     private Author author;
+
 
     public Post() {
         super();
